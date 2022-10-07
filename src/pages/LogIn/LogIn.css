@@ -1,6 +1,12 @@
 /* google font */
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap");
-
 .font {
   font-family: "Nunito Sans", sans-serif;
+}
+
+.user-icon {
+  background: url("../../images/user.png") no-repeat left;
+}
+.pass-icon {
+  background: url("../../images/password.png") no-repeat left;
 }
