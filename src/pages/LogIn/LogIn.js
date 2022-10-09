@@ -1,21 +1,34 @@
+import { sendPasswordResetEmail } from 'firebase/auth';
 import React, { useState } from 'react';
+import {
+  useSignInWithEmailAndPassword
+} from "react-firebase-hooks/auth";
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import eyeIcon from "../../images/eye.png";
 import img1 from '../../images/img1.png';
+import auth from "../firebase.init";
 import './LogIn.css';
+
 
 
 const LogIn = () => {
   const [hide,setHide]=useState(false);
+  const [email,setEmail]=useState("");
+  const navigate=useNavigate();
    const {
      register,
      handleSubmit,
      formState: { errors },
    } = useForm();
+    const [signInWithEmailAndPassword, user, loading, error] =
+      useSignInWithEmailAndPassword(auth);
    const onSubmit = (data) => {
-    //  signInWithEmailAndPassword(data.email, data.password);
-    //  console.log(data);
-    //  setEmail(data.email);
+      signInWithEmailAndPassword(data.email, data.password);
+     console.log(data);
+     setEmail(data.email);
+     navigate("/dashboard");
+    
    };
   return (
     <div>
@@ -96,10 +109,10 @@ const LogIn = () => {
                   )}
                 </label>
                 <a
-                  // onClick={async () => {
-                  //   await sendPasswordResetEmail(email);
-                  //   alert("Sent email");
-                  // }}
+                  onClick={async () => {
+                    await sendPasswordResetEmail(email);
+                    alert("Sent email");
+                  }}
                   href=""
                   class="label-text-alt  font-bold text-center text-sm"
                 >
